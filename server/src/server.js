@@ -33,3 +33,17 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 connectDB(process.env.MONGO_URI).then(() => {
   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 });
+
+// Health check
+app.get('/health', (req, res) => res.json({ status: 'ok', uptime: process.uptime() }));
+
+// Global error handler (last middleware)
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.status || 500).json({ error: process.env.NODE_ENV === 'production' ? 'Internal Server Error' : err.message });
+});
+
+const helmet = require('helmet');
+app.use(helmet());
+
+

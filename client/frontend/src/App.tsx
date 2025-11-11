@@ -7,11 +7,10 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import CategoriesPage from "./pages/CategoriesPage";
 
-
 const App: React.FC = () => {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
 
-  // Update token if changed in localStorage (e.g., after login)
+  // Keep token synced with localStorage (login/logout across tabs)
   useEffect(() => {
     const handleStorage = () => setToken(localStorage.getItem("token"));
     window.addEventListener("storage", handleStorage);
@@ -23,12 +22,13 @@ const App: React.FC = () => {
     setToken(null);
   };
 
-  const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
-    return token ? children : <Navigate to="/login" replace />;
+  // ✅ Route Wrappers
+  const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    return token ? <>{children}</> : <Navigate to="/login" replace />;
   };
 
-  const PublicRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
-    return token ? <Navigate to="/" replace /> : children;
+  const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    return token ? <Navigate to="/" replace /> : <>{children}</>;
   };
 
   return (
@@ -43,12 +43,13 @@ const App: React.FC = () => {
           <div className="space-x-4">
             <Link to="/" className="hover:underline">Posts</Link>
             <Link to="/create" className="hover:underline">Create Post</Link>
-            <Link to="/categories" className="hover:underline">Category</Link>
+            <Link to="/categories" className="hover:underline">Categories</Link>
             <button onClick={logout} className="hover:underline">Logout</button>
           </div>
         </nav>
       )}
 
+      {/* Main */}
       <main className="p-6 min-h-screen bg-gray-100 text-gray-900">
         <Routes>
           {/* Public Routes */}
@@ -64,11 +65,11 @@ const App: React.FC = () => {
             path="/register"
             element={
               <PublicRoute>
-                <RegisterPage onRegister={() => setToken(localStorage.getItem("token"))} />
+                <RegisterPage />
               </PublicRoute>
             }
           />
-          
+
           {/* Private Routes */}
           <Route
             path="/"
@@ -116,6 +117,7 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
+      {/* Footer */}
       {token && (
         <footer className="text-center py-4 bg-gray-200 text-gray-600">
           © 2025 MERN Blog | Built with ❤️ using React & Node.js
