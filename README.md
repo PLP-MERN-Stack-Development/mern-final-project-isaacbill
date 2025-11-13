@@ -132,10 +132,11 @@ This project uses a GitHub Actions workflow to automatically build and deploy th
 ## Deployed Applications
 
 ### Frontend
-[View Frontend on Render](https://[your-frontend-url.onrender.com](https://mern-blog-ilio.onrender.com))
+[View Frontend on Render](https://mern-blog-ilio.onrender.com)
 
 ### Backend
-[View Backend API on Render](https://[your-backend-url.onrender.com](https://mernblog-3sl8.onrender.com))
+[View Backend API on Render](https://mernblog-3sl8.onrender.com)
+
 
 
 
