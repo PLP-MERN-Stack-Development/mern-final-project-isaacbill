@@ -17,47 +17,50 @@ jobs:
         node-version: [22.x]
 
     steps:
+      # Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      # Debug: list files to verify paths
-      - name: List repo files
-        run: ls -R
-
-      # Cache backend node_modules
+      # Cache backend dependencies
       - name: Cache backend dependencies
         uses: actions/cache@v4
         with:
-          path: server/node_modules
-          key: ${{ runner.os }}-server-${{ hashFiles('server/package-lock.json') }}
+          path: node_modules
+          key: ${{ runner.os }}-server-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-server-
+        working-directory: ./server
 
+      # Install backend dependencies
       - name: Install backend dependencies
-        working-directory: server
+        working-directory: ./server
         run: npm ci
 
-      # Cache frontend node_modules
+      # Cache frontend dependencies
       - name: Cache frontend dependencies
         uses: actions/cache@v4
         with:
-          path: client/frontend/node_modules
-          key: ${{ runner.os }}-frontend-${{ hashFiles('client/frontend/package-lock.json') }}
+          path: node_modules
+          key: ${{ runner.os }}-frontend-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-frontend-
+        working-directory: ./client/frontend
 
+      # Install frontend dependencies
       - name: Install frontend dependencies
-        working-directory: client/frontend
+        working-directory: ./client/frontend
         run: npm ci
 
+      # Build frontend
       - name: Build frontend for production
-        working-directory: client/frontend
+        working-directory: ./client/frontend
         run: npm run build
 
   deploy:
@@ -67,8 +70,10 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
+      # Trigger Render backend deploy
       - name: Trigger Render Backend Deployment
         run: curl -X POST ${{ secrets.RENDER_BACKEND_HOOK }}
 
+      # Trigger Render frontend deploy
       - name: Trigger Render Frontend Deployment
         run: curl -X POST ${{ secrets.RENDER_FRONTEND_HOOK }}
