@@ -92,3 +92,40 @@ Create, edit, or delete posts.
 
 Add comments and browse posts.
 
+
+
+## CI/CD Pipeline with GitHub Actions
+
+This project uses a GitHub Actions workflow to automatically build and deploy the MERN stack application to Render whenever changes are pushed to the `main` branch or a pull request is opened against it.
+
+### Workflow Overview
+
+- **Trigger:** Push to `main` or Pull Request to `main`.
+- **Node.js Version:** 22.x
+- **Jobs:**
+  1. **Build and Deploy**
+     - **Checkout Repository:** Pulls the latest code.
+     - **Setup Node.js:** Installs the specified Node version.
+     - **Backend**
+       - Installs dependencies (`npm ci`) in `./server`.
+     - **Frontend**
+       - Installs dependencies (`npm ci`) in `./client/frontend`.
+       - Builds the frontend for production (`npm run build`).
+     - **Deployment**
+       - Triggers Render backend deployment using a webhook (`RENDER_BACKEND_HOOK` secret).
+       - Triggers Render frontend deployment using a webhook (`RENDER_FRONTEND_HOOK` secret).
+
+### How to Use
+
+1. Push changes to the `main` branch or open a pull request.
+2. GitHub Actions automatically runs the workflow.
+3. Render deployments are triggered, and the app is updated in production.
+
+### Notes
+
+- Environment variables for Render deployment are stored as GitHub secrets (`RENDER_BACKEND_HOOK` and `RENDER_FRONTEND_HOOK`).
+- Testing is optional and can be added to the workflow if desired.
+- The workflow ensures that the frontend is always built before deployment, so the live app is always up to date.
+
+
+
