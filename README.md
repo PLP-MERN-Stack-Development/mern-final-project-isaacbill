@@ -129,6 +129,8 @@ This project uses a GitHub Actions workflow to automatically build and deploy th
 
 # MERN Stack Application
 
+[View the application deployed](https://mern-blog-ilio.onrender.com)
+
 ## Deployed Applications
 
 ### Frontend
@@ -136,6 +138,7 @@ This project uses a GitHub Actions workflow to automatically build and deploy th
 
 ### Backend
 [View Backend API on Render](https://mernblog-3sl8.onrender.com)
+
 
 
 
