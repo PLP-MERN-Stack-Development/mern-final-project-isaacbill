@@ -50,8 +50,8 @@ A full-stack **MERN (MongoDB, Express, React, Node.js)** blog application with a
 ### 1. Clone the repository
 
 ```bash
-git clone [https://github.com/yourusername/mern-blog.git](https://github.com/isaacbill/MernBlog.git)
-cd MernBlog
+git clone {(https://github.com/PLP-MERN-Stack-Development/mern-final-project-isaacbill.git)](https://github.com/PLP-MERN-Stack-Development/mern-final-project-isaacbill.git)
+cd mern-final-project-isaacbill
 
 **2. Backend Setup**
 cd server
@@ -129,13 +129,15 @@ This project uses a GitHub Actions workflow to automatically build and deploy th
 
 # MERN Stack Application
 
+[View the application deployed](https://mern-blog-ilio.onrender.com)
+
 ## Deployed Applications
 
 ### Frontend
 [View Frontend on Render](https://mern-blog-ilio.onrender.com)
 
-### Backend
-[View Backend API on Render](https://mernblog-3sl8.onrender.com)
+
+
 
 
 
