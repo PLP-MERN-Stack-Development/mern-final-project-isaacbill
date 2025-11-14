@@ -50,7 +50,7 @@ A full-stack **MERN (MongoDB, Express, React, Node.js)** blog application with a
 ### 1. Clone the repository
 
 ```bash
-git clone [https://github.com/yourusername/mern-blog.git](https://github.com/isaacbill/MernBlog.git)
+git clone {(https://github.com/PLP-MERN-Stack-Development/mern-final-project-isaacbill.git)](https://github.com/PLP-MERN-Stack-Development/mern-final-project-isaacbill.git)
 cd MernBlog
 
 **2. Backend Setup**
