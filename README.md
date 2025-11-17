@@ -136,6 +136,12 @@ This project uses a GitHub Actions workflow to automatically build and deploy th
 ### Frontend
 [View Frontend on Render](https://mern-blog-ilio.onrender.com)
 
+## Video Demonstration
+
+https://1drv.ms/v/c/49146b06df915945/IQCHXj8COMEySpgiIJ1xL0h_AYuxXuaP_hx_GQaCGfNdarw?e=sYT1S2
+
+
+
 
 
 
